@@ -28,7 +28,8 @@ fun Settings() {
         val state = viewModel.uiState.collectAsState().value
         SettingsList(
             state = state,
-            toggleNotificationSetting = viewModel::toggleNotificationSetting
+            toggleNotificationSetting = viewModel::toggleNotificationSetting,
+            toggleHintsSetting = viewModel::toggleHintSetting
         )
     }
 }
@@ -37,6 +38,7 @@ fun Settings() {
 fun SettingsList(
     state: SettingsState,
     toggleNotificationSetting: () -> Unit,
+    toggleHintsSetting: () -> Unit,
 ) {
     Column {
         TopAppBar(
@@ -63,6 +65,19 @@ fun SettingsList(
             toggleNotificationSetting()
         }
         Divider()
+
+        HintSettingsItem(
+            modifier = Modifier.fillMaxWidth(),
+            title = stringResource(id = R.string.hint_settings),
+            checked = state.hintsEnabled,
+            onClick = { toggleHintsSetting() }
+        )
+        Divider()
+        ManageSubscriptionSettingItem(
+            title = stringResource(id = R.string.subscription_settings),
+        ) {
+
+        }
     }
 }
 
