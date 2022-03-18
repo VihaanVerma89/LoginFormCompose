@@ -43,7 +43,7 @@ fun MarketingSettinItem(
                                 onOptionSelected(marketingOption)
                             },
                             role = Role.RadioButton
-                        ),
+                        ).padding(16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(selected = selectedOption.id == index, onClick = null)

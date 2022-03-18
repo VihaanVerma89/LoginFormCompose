@@ -76,9 +76,10 @@ fun SettingsList(
             modifier = Modifier.fillMaxWidth(),
             title = stringResource(id = R.string.hint_settings),
             checked = state.hintsEnabled,
-            onClick = { toggleHintsSetting() }
+            onCheckedChanged = { toggleHintsSetting() }
         )
         Divider()
+
         ManageSubscriptionSettingItem(
             title = stringResource(id = R.string.subscription_settings),
         ) {
@@ -92,7 +93,8 @@ fun SettingsList(
         )
         Divider()
         ThemeSettingItem(selectedTheme = state.selectedTheme, onThemeSelected = setSelectedTheme)
-        Divider()
+        SectionSpacer()
+        AppVersionSettingItem(appVersion = stringResource(id = R.string.app_version))
     }
 }
 
