@@ -2,7 +2,9 @@ package academy.compose.settings.ui
 
 import academy.compose.settings.R
 import academy.compose.settings.SettingsViewModel
+import academy.compose.settings.model.MarketingOption
 import academy.compose.settings.model.SettingsState
+import academy.compose.settings.model.Theme
 import academy.compose.settings.ui.theme.LoginFormComposeTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -29,7 +31,9 @@ fun Settings() {
         SettingsList(
             state = state,
             toggleNotificationSetting = viewModel::toggleNotificationSetting,
-            toggleHintsSetting = viewModel::toggleHintSetting
+            toggleHintsSetting = viewModel::toggleHintSetting,
+            setMarketingOption = viewModel::setMarketingSetting,
+            setSelectedTheme = viewModel::setTheme
         )
     }
 }
@@ -39,6 +43,8 @@ fun SettingsList(
     state: SettingsState,
     toggleNotificationSetting: () -> Unit,
     toggleHintsSetting: () -> Unit,
+    setMarketingOption: (option: MarketingOption) -> Unit,
+    setSelectedTheme: (theme: Theme) -> Unit
 ) {
     Column {
         TopAppBar(
@@ -78,6 +84,15 @@ fun SettingsList(
         ) {
 
         }
+        SectionSpacer(modifier = Modifier.fillMaxWidth())
+        MarketingSettinItem(
+            modifier = Modifier.fillMaxWidth(),
+            selectedOption = state.marketingOption,
+            onOptionSelected = setMarketingOption
+        )
+        Divider()
+        ThemeSettingItem(selectedTheme = state.selectedTheme, onThemeSelected = setSelectedTheme)
+        Divider()
     }
 }
 
